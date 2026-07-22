@@ -1,0 +1,10 @@
+<svg width="900" height="220" viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="220" fill="#0d1117" rx="8"/>
+  
+  <text x="24" y="40" font-family="monospace" font-size="16" font-weight="bold" fill="#58a6ff">Nova Vacation Homes</text>
+  <text x="24" y="60" font-family="monospace" font-size="12" fill="#8b949e">Software Engineer Intern -- May-Aug 2026</text>
+  <text x="24" y="84" font-family="monospace" font-size="13" fill="#c9d1d9">Shipped a voice AI answering 500+ calls; cut RAG latency from 40s to 300ms.</text>
+  <text x="24" y="130" font-family="monospace" font-size="16" font-weight="bold" fill="#58a6ff">Maybole</text>
+  <text x="24" y="150" font-family="monospace" font-size="12" fill="#8b949e">Software Engineer Intern -- Apr-Aug 2026</text>
+  <text x="24" y="174" font-family="monospace" font-size="13" fill="#c9d1d9">Built an outreach platform connecting students to 13,000+ banking contacts.</text>
+</svg>

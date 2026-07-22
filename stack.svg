@@ -1,0 +1,12 @@
+<svg width="900" height="212" viewBox="0 0 900 212" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="212" fill="#0d1117" rx="8"/>
+  
+  <text x="24" y="36" font-family="monospace" font-size="13" fill="#f0883e">Languages</text>
+  <text x="24" y="56" font-family="monospace" font-size="13" fill="#c9d1d9">Python | TypeScript | JavaScript | Java | Swift | SQL | R | HTML/CSS</text>
+  <text x="24" y="80" font-family="monospace" font-size="13" fill="#f0883e">Frameworks</text>
+  <text x="24" y="100" font-family="monospace" font-size="13" fill="#c9d1d9">React | React Native | Next.js | Node.js | Express | FastAPI | PyTorch | MediaPipe</text>
+  <text x="24" y="124" font-family="monospace" font-size="13" fill="#f0883e">Data / Infra</text>
+  <text x="24" y="144" font-family="monospace" font-size="13" fill="#c9d1d9">PostgreSQL | pgvector | Redis | RabbitMQ | Docker</text>
+  <text x="24" y="168" font-family="monospace" font-size="13" fill="#f0883e">Cloud & Tools</text>
+  <text x="24" y="188" font-family="monospace" font-size="13" fill="#c9d1d9">AWS Bedrock | Git | REST APIs | WebSockets | Twilio | Stripe | Google Maps API</text>
+</svg>

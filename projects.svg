@@ -1,0 +1,16 @@
+<svg width="900" height="362" viewBox="0 0 900 362" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="362" fill="#0d1117" rx="8"/>
+  
+  <text x="24" y="50" font-family="monospace" font-size="16" font-weight="bold" fill="#58a6ff">T-Care</text>
+  <text x="24" y="70" font-family="monospace" font-size="12" fill="#f0883e">1st, AWS x UofT Hackathon</text>
+  <text x="24" y="92" font-family="monospace" font-size="13" fill="#8b949e">Turns "I lost my TCard" into the exact campus office to visit. Bedrock + React/Node, routes across 30+ services.</text>
+  <text x="24" y="128" font-family="monospace" font-size="16" font-weight="bold" fill="#58a6ff">Fall Detection App</text>
+  <text x="24" y="148" font-family="monospace" font-size="12" fill="#f0883e">React Native + TCN</text>
+  <text x="24" y="170" font-family="monospace" font-size="13" fill="#8b949e">Catches a fall from motion data in real time, streaming sensor input at 50 Hz.</text>
+  <text x="24" y="206" font-family="monospace" font-size="16" font-weight="bold" fill="#58a6ff">Demo & Test Environments</text>
+  <text x="24" y="226" font-family="monospace" font-size="12" fill="#f0883e">Docker + Postgres</text>
+  <text x="24" y="248" font-family="monospace" font-size="13" fill="#8b949e">Spins up realistic, disposable demo environments so teams stop testing on real user data.</text>
+  <text x="24" y="284" font-family="monospace" font-size="16" font-weight="bold" fill="#58a6ff">Squat-Depth Judge (iOS)</text>
+  <text x="24" y="304" font-family="monospace" font-size="12" fill="#f0883e">Swift + MediaPipe</text>
+  <text x="24" y="326" font-family="monospace" font-size="13" fill="#8b949e">Judges squat depth from video like a meet ref would. ~90% accurate against 100+ labeled clips.</text>
+</svg>
