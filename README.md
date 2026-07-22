@@ -12,6 +12,8 @@
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/s01.svg"/><img src="assets/light/s01.svg" alt="01 — whoami"/></picture>
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/whoami.svg"/><img src="assets/light/whoami.svg" alt="About Derek"/></picture>
 
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/barbell.svg"/><img src="assets/light/barbell.svg" alt="Rotating 3D wireframe barbell"/></picture>
+
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/s02.svg"/><img src="assets/light/s02.svg" alt="02 — projects"/></picture>
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/projects.svg"/><img src="assets/light/projects.svg" alt="Projects"/></picture>
 

@@ -20,6 +20,7 @@ defaults, so a renderer that ignores animation shows finished content
 rather than blank content. CSS @keyframes are decorative-only.
 """
 
+import math
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -211,6 +212,94 @@ def whoami(t):
 
 
 # --------------------------------------------------------------------------
+# barbell - a real 3D wireframe, baked to keyframes
+# --------------------------------------------------------------------------
+#
+# Vertices are rotated and perspective-projected here, one frame at a time, and
+# emitted as a SMIL keyframe list; the browser only interpolates between
+# precomputed frames, so no JavaScript is involved and it renders inside the
+# <img> sandbox GitHub uses. Geometry is emitted as polylines rather than loose
+# edge pairs - a closed ring costs ~7 chars per point instead of ~18 per edge,
+# and a loaded barbell is almost entirely circles.
+
+BB = {
+    "cx": 450, "cy": 101,   # cy centres the swept bounding box, not the canvas
+    "h": 250, "fov": 570, "dist": 5.4,
+    "frames": 18, "tilt": -0.26, "amp": 0.92, "dur": "14s",
+}
+
+
+def _ring(x, r, n=12):
+    return [(x, r * math.cos(2 * math.pi * i / n), r * math.sin(2 * math.pi * i / n))
+            for i in range(n)]
+
+
+def _barbell_geometry():
+    """Returns (verts, polys) with polys as [(vertex_indices, closed), ...]."""
+    verts, polys = [], []
+
+    def add(pts, closed):
+        base = len(verts)
+        verts.extend(pts)
+        polys.append((list(range(base, base + len(pts))), closed))
+        return base
+
+    HALF, SHAFT, SLEEVE = 2.30, 0.070, 0.105
+    PLATES = [(0.62, 1.33, 0.10), (0.47, 1.49, 0.085), (0.17, 1.63, 0.075)]
+
+    for side in (1, -1):
+        for r, x0, th in PLATES:
+            n = 12 if r > 0.3 else 8
+            a = add(_ring(side * x0, r, n), True)
+            b = add(_ring(side * (x0 + th), r, n), True)
+            for k in range(0, n, max(1, n // 4)):
+                polys.append(([a + k, b + k], False))     # rim gives it thickness
+        add(_ring(side * HALF, SLEEVE, 8), True)           # sleeve end cap
+
+    for x in (-0.34, 0.0, 0.34):                           # knurl marks
+        add(_ring(x, SHAFT, 6), True)
+
+    for k in range(4):                                     # the shaft itself
+        th = 2 * math.pi * k / 4
+        add([(-HALF, SHAFT * math.cos(th), SHAFT * math.sin(th)),
+             (HALF, SHAFT * math.cos(th), SHAFT * math.sin(th))], False)
+
+    return verts, polys
+
+
+def barbell(t):
+    cfg = BB
+    verts, polys = _barbell_geometry()
+
+    def place(v, a):
+        x, y, z = v
+        c, s = math.cos(a), math.sin(a)
+        x, z = x * c + z * s, -x * s + z * c              # yaw
+        ct, st = math.cos(cfg["tilt"]), math.sin(cfg["tilt"])
+        y, z = y * ct - z * st, y * st + z * ct           # pitch
+        k = cfg["fov"] / (z + cfg["dist"])
+        return (cfg["cx"] + x * k, cfg["cy"] - y * k)
+
+    # sweep: turn to three-quarters, back through flat, and out the other way,
+    # so the silhouette never stops reading as a barbell
+    ds = []
+    for f in range(cfg["frames"] + 1):
+        a = cfg["amp"] * math.sin(2 * math.pi * (f % cfg["frames"]) / cfg["frames"])
+        pts = [place(v, a) for v in verts]
+        ds.append("".join(
+            "M" + "L".join(f"{pts[i][0]:.0f},{pts[i][1]:.0f}" for i in idx)
+            + ("Z" if closed else "") for idx, closed in polys))
+
+    kt = ";".join(f"{i/cfg['frames']:.4f}" for i in range(cfg["frames"] + 1))
+    s = head(cfg["h"])
+    s += (f'<path fill="none" stroke="{t["ink"]}" stroke-width="1.15" '
+          f'stroke-linejoin="round" stroke-linecap="round" opacity="0.92" d="{ds[0]}">'
+          f'<animate attributeName="d" values="{";".join(ds)}" keyTimes="{kt}" '
+          f'dur="{cfg["dur"]}" repeatCount="indefinite"/></path>')
+    return s + "</svg>"
+
+
+# --------------------------------------------------------------------------
 # projects
 # --------------------------------------------------------------------------
 
@@ -350,6 +439,7 @@ def build():
         files = {
             "header-v1.svg": header(t),
             "whoami.svg": whoami(t),
+            "barbell.svg": barbell(t),
             "projects.svg": projects(t),
             "experience.svg": experience(t),
             "stack.svg": stack(t),
